@@ -1,4 +1,4 @@
-# Untied::Observer
+# Untied
 
 Need to register an Observer which observes ActiveRecord models in different applications? Untied Observer for the rescue.
 
