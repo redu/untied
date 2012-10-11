@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'untied/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "untied-observer"
-  gem.version       = Untied::VERSION
+  gem.name          = "untied"
+  gem.version       = VERSION
   gem.authors       = ["Guilherme Cavalcanti"]
   gem.email         = ["guiocavalcanti@gmail.com"]
   gem.description   = "Cross application ActiveRecord::Observer"
@@ -16,4 +16,10 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+
+  gem.add_development_dependency "rspec"
+  gem.add_development_dependency "ruby-debug"
+
+  gem.add_dependency "activerecord", "~> 3.0.10"
+  gem.add_dependency "activemodel", "~> 3.0.10"
 end

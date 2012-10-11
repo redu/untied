@@ -34,17 +34,21 @@ UntiedObserver.configure do |config|
 emd
 ```
 
-The ``service_name`` configuration is very important here. It must be unique across all the services and will be used to uniquely identify the models.
+The ``service_name`` configuration is very important here. It must be unique across all the services and will be used to uniquely identify the models. The ``deliver_messages``option enable and disable events sending. It's useful to disable it on test environment, for example.
 
-You also have to define which ActiveRecord livecycle callbacks will be propagated to the other applications:
+You also have to define which ActiveRecord callbacks will propagate the model to the other services. This job is defined by the Watcher:
 
 ```ruby
-class Publisher
+class Watcher
   include Untied::Publisher
 
-  watch User, :after_create, :after_update
+  def initialize
+    watch User, :after_create, :after_update
+  end
 end
 ```
+
+The watcher defined above will propagate Users instances when they are created or updated. The rules here are the sabe than ActiveRecord::Callbacks.
 
 ### Consumer
 
