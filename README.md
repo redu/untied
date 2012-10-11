@@ -24,7 +24,7 @@ The untied Gem relies on RabbitMQ, so it need to be installed in order to work p
 
 ### Publisher
 
-You need to set some configurations on the publisher side:
+You need to do some configurations on the publisher side:
 
 ```ruby
 UntiedObserver.configure do |config|
@@ -34,9 +34,9 @@ UntiedObserver.configure do |config|
 emd
 ```
 
-The ``service_name`` configuration is very important here. It must be unique across all the services and will be used to uniquely identify the models. The ``deliver_messages``option enable and disable events sending. It's useful to disable it on test environment, for example.
+The ``service_name`` configuration is very important here. It must be unique across all the services and will be used to uniquely identify the models. The ``deliver_messages``option enable and disable events sending. Disabling it may be useful on test and development environment.
 
-You also have to define which ActiveRecord callbacks will propagate the model to the other services. This job is defined by the Watcher:
+You should also define when the ActiveRecord models will be propagated to other services. We can take advantage on the usefulness of ``ActiveRecord::Callbacks``. To keep the things DRY, this job may be done inside what we call the Watcher:
 
 ```ruby
 class Watcher
@@ -48,7 +48,7 @@ class Watcher
 end
 ```
 
-The watcher defined above will propagate Users instances when they are created or updated. The rules here are the sabe than ActiveRecord::Callbacks.
+The watcher defined above will propagate Users instances when they are created or updated.
 
 ### Consumer
 
@@ -74,6 +74,11 @@ One important step is identify which service models the observer is listening to
 ## Internals
 
 TODO
+
+## What need to be done?
+
+- Make it ActiveRecord independent.
+- Add instructions about how to initialize the worker.
 
 ## Contributing
 
