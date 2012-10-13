@@ -10,3 +10,4 @@ end
 require 'untied/config'
 require 'untied/publisher_observer'
 require 'untied/publisher'
+require 'untied/event'
