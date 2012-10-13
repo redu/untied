@@ -7,5 +7,6 @@ module Untied
   # Your code goes here...
 end
 
+require 'untied/config'
 require 'untied/publisher_observer'
 require 'untied/publisher'

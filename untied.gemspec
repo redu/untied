@@ -22,4 +22,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "activerecord", "~> 3.0.10"
   gem.add_dependency "activemodel", "~> 3.0.10"
+  gem.add_runtime_dependency "configurable"
+  gem.add_runtime_dependency "logger"
+
 end
