@@ -19,9 +19,10 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "ruby-debug"
+  gem.add_development_dependency "sqlite3"
 
-  gem.add_dependency "activerecord", "~> 3.0.10"
-  gem.add_dependency "activemodel", "~> 3.0.10"
+  gem.add_runtime_dependency "activerecord", "~> 3.0.10"
+  gem.add_runtime_dependency "activemodel", "~> 3.0.10"
   gem.add_runtime_dependency "configurable"
   gem.add_runtime_dependency "logger"
 

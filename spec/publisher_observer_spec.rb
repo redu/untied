@@ -3,58 +3,49 @@ require 'spec_helper'
 module Untied
   describe PublisherObserver do
     before do
-      # Fake AR subclass
-      class User
-        extend ActiveModel::Callbacks
-        define_model_callbacks :create
-
-        def create
-          _run_create_callbacks {  }
-        end
-      end
-
-      class Post
-        extend ActiveModel::Callbacks
-        define_model_callbacks :create, :update
-
-        def create
-          _run_create_callbacks {  }
-        end
-
-        def update
-          _run_update_callbacks {  }
-        end
-      end
-
       class Pub
         include Untied::Publisher
       end
-    end
-    let(:publisher) { Pub.new }
-
-    context "callbacks" do
-      before do
-        PublisherObserver.stub(:instance).
-          and_return(double('Untied::PublisherObserver'))
-
+      PublisherObserver.any_instance.stub(:publisher) do
+        publisher = Pub.new
         publisher.watch(User, :after_create)
-        publisher.watch(Post, :after_update)
+        publisher.watch(User, :after_update)
+        publisher
       end
+    end
 
+    context "ActiveRecord::Callbacks" do
       it "should call the observer when the callback is fired" do
-        publisher.define_callbacks
         PublisherObserver.instance.should_receive(:after_create)
-        User.new.create
+        User.create
       end
 
-      it "should accept multiple callbacks even in differents #watch" do
-        publisher.watch(Post, :after_create)
-        publisher.define_callbacks
-
+      it "should accept multiple callbacks even in different #watch" do
         PublisherObserver.instance.should_receive(:after_create)
         PublisherObserver.instance.should_receive(:after_update)
-        Post.new.create
-        Post.new.update
+
+        user = User.create(:name => "yo")
+        user.update_attributes({:name => "Ops!"})
+      end
+    end
+
+    context "#producer" do
+      it "should return the Producer" do
+        PublisherObserver.instance.should respond_to(:producer)
+      end
+    end
+
+    context "when callbacks are fired" do
+      let(:producer) { double('Untied::Producer') }
+
+      ActiveRecord::Callbacks::CALLBACKS.each do |callback|
+        it "should publish the event on #{callback}" do
+          PublisherObserver.instance.stub(:producer).and_return(producer)
+
+          producer.should_receive(:publish).with(an_instance_of(Event))
+
+          PublisherObserver.instance.send(callback, double('User'))
+        end
       end
     end
   end

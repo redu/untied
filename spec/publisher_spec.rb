@@ -4,28 +4,6 @@ module Untied
   describe Publisher do
     before do
       # Fake AR subclass
-      class User
-        extend ActiveModel::Callbacks
-        define_model_callbacks :create
-
-        def create
-          _run_create_callbacks {  }
-        end
-      end
-
-      class Post
-        extend ActiveModel::Callbacks
-        define_model_callbacks :create, :update
-
-        def create
-          _run_create_callbacks {  }
-        end
-
-        def update
-          _run_update_callbacks {  }
-        end
-      end
-
       class Pub
         include Untied::Publisher
       end

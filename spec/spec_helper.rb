@@ -5,8 +5,25 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require "untied"
-require "ruby-debug"
+require 'untied'
+require 'ruby-debug'
+require 'active_record'
+
+ar_config = { :test => { :adapter => 'sqlite3', :database => ":memory:" } }
+ActiveRecord::Base.configurations = ar_config
+ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[:test])
+
+ActiveRecord::Schema.define do
+  create_table :posts, :force => true do |t|
+    t.string :title
+  end
+  create_table :users, :force => true do |t|
+    t.string :name
+  end
+end
+
+class User < ActiveRecord::Base; end
+class Post < ActiveRecord::Base; end
 
 Untied.configure do |config|
   config.service_name = "core"
