@@ -2,7 +2,7 @@
 
 Need to register an Observer which observes ActiveRecord models in different applications? Untied Observer for the rescue.
 
-The publisher application registers which models are able to be observed. The consumers just need to define callbacks that will be fired for certain events. The consumer part uses an API similar to ActiveRecord::Observers.
+The publisher application registers which models are able to be observed. The consumers just need to define callbacks that will be fired for certain events. The consumer part uses an API similar to the one provided by ActiveRecord::Observer.
 
 ## Installation
 
@@ -27,7 +27,7 @@ The untied Gem relies on RabbitMQ, so it need to be installed in order to work p
 You need to do some configurations on the publisher side:
 
 ```ruby
-UntiedObserver.configure do |config|
+Untied.configure do |config|
   config.logger = Logger.new(STDOUT)
   config.deliver_messages = true # Silent mode when falsy
   config.service_name = "social-network"
@@ -59,11 +59,11 @@ class UserObserver < Untied::Observer
   observe "User", :from => "social-network"
 
   def after_create(user)
-    puts "A the following user was created on Wally service: #{user}"
+    puts "A the following user was created on social-network service: #{user}"
   end
 
   def after_update(user)
-    puts "A the following user was updated on Wally service: #{user}"
+    puts "A the following user was updated on social-network service: #{user}"
   end
 end
 ```
@@ -79,6 +79,9 @@ TODO
 
 - Make it ActiveRecord independent.
 - Add instructions about how to initialize the worker.
+- Failsafeness
+- Do not rely on Pub class name
+
 
 ## Contributing
 
