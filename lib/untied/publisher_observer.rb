@@ -32,10 +32,14 @@ module Untied
       Producer.new
     end
 
-    #FIXME don't rely on specific class name
     def publisher
-      Pub.new
-    end
+      doorkeeper = Untied.config.doorkeeper
+      klass = case doorkeeper
+      when String then doorkeeper.constantize;
+      when Symbol then doorkeeper.to_s.camelize.constantize;
+      end
 
+      klass.new
+    end
   end
 end
