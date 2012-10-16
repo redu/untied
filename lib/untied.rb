@@ -19,6 +19,8 @@ module Untied
 end
 
 require 'untied/config'
+require 'untied/observer'
+require 'untied/consumer'
 require 'untied/producer'
 require 'untied/publisher_observer'
 require 'untied/publisher'
