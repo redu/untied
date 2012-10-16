@@ -6,24 +6,26 @@ module Untied
       class ::UserObserver < Untied::Observer
       end
     end
+    after do
+      obsc = ::UserObserver
+      %w(observed_classes observed_service).each do |method|
+        if ::UserObserver.respond_to?(method)
+          ::UserObserver.send(:remove_method, method)
+        end
+      end
+    end
     let(:subject) { ::UserObserver.instance }
 
     context ".instance" do
       it "should return a valid instance of the observer" do
         subject.should be_a Untied::Observer
       end
-      it "should return the same instance multiple times" do
+      it "should be a singleton" do
         subject.should == UserObserver.instance
       end
     end
 
     context ".observe" do
-      xit "should define callback as after_create_for_user_from_core" do
-        ::UserObserver.observe(:user, :from => :core)
-        subject.should \
-          respond_to(:after_create_for_user_from_core)
-      end
-
       context ".observed_classes" do
         it "should define .observed_classes" do
           ::UserObserver.observe(:user, :from => :core)
