@@ -52,9 +52,16 @@ module Untied
           subject.observed_service == :core
         end
 
-        it "should default to core" do
-          ::UserObserver.observe(User)
-          subject.observed_service == :core
+        context "when omiting service name" do
+          it "should default to core" do
+            ::UserObserver.observe(User)
+            subject.observed_service == :core
+          end
+
+          it "should define observed classes" do
+            ::UserObserver.observe(User)
+            subject.observed_classes.should == [User]
+          end
         end
       end
     end
@@ -85,6 +92,13 @@ module Untied
         subject.should_not_receive(:after_create)
         subject.notify(:after_create, :user, :foo, { :user => { :name => "há!" }})
       end
+
+      it "should pass trhough when entity is not observed" do
+        subject.stub(:after_create)
+        subject.should_not_receive(:after_create)
+        subject.notify(:after_create, :post, :core, { :user => { :name => "há!" }})
+      end
+    end
 
     context ".define_callbacks" do
       before do

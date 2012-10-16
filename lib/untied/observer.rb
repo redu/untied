@@ -31,19 +31,14 @@ module Untied
       private
 
       def deal_with_args(*args)
-        from = if args.last.is_a?(Hash)
-                 args.last.fetch(:from, "core").to_sym
-               else
-                 :core
-               end
+        if args.last.is_a? Hash # calling deal_with_args(User, Post, :from =>...
+          from = args.delete_at(-1).fetch(:from, :core).to_sym
+        else # calling deal_with_args(User, Post..)
+          from = :core
+        end
 
-        classes = args[0..-2].collect do |klass|
-          case klass
-          when Symbol, String then
-            klass.to_s.camelize.constantize
-          else
-            klass
-          end
+        classes = args.collect do |c|
+          c.is_a?(Class) ? c : c.to_s.camelize.constantize
         end
 
         [from, classes]
@@ -57,6 +52,7 @@ module Untied
     def notify(callback, klass, service, payload)
       return nil unless CALLBACKS.include? callback
       return nil unless service == observed_service
+      return nil unless observed_classes.include? klass.to_s.camelize.constantize
 
       self.send(callback, payload)
     end
