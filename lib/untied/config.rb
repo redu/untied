@@ -19,7 +19,7 @@ module Untied
     config :logger, Logger.new(STDOUT)
     config :deliver_messages, true
     config :service_name
-    config :doorkeeper, "Pub"
+    config :doorkeeper, "Doorkeeper"
   end
 end
 

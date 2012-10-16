@@ -3,11 +3,11 @@ require 'spec_helper'
 module Untied
   describe PublisherObserver do
     before do
-      class Pub
-        include Untied::Publisher
+      class ::Doorkeeper
+        include Untied::Doorkeeper
       end
       PublisherObserver.any_instance.stub(:publisher) do
-        publisher = Pub.new
+        publisher = ::Doorkeeper.new
         publisher.watch(User, :after_create)
         publisher.watch(User, :after_update)
         publisher

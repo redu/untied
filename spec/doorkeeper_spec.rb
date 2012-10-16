@@ -1,14 +1,13 @@
 require 'spec_helper'
 
 module Untied
-  describe Publisher do
+  describe Doorkeeper do
     before do
-      # Fake AR subclass
-      class Pub
-        include Untied::Publisher
+      class ::Doorkeeper
+        include Untied::Doorkeeper
       end
     end
-    let(:publisher) { Pub.new }
+    let(:publisher) { ::Doorkeeper.new }
 
     context "#watch" do
       it "should add observed classes to observed list" do

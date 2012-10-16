@@ -1,16 +1,16 @@
 module Untied
-  module Publisher
-    # The publisher defines which ActiveRecord models will be propagated to
+  module Doorkeeper
+    # The Doorkeeper defines which ActiveRecord models will be propagated to
     # other services. The instance method #watch is available for this.
     #
-    # The Publisher works in a similar way of ActiveRecord::Observer. It register
+    # The Doorkeeper a similar way of ActiveRecord::Observer. It register
     # functions on the models which calls the method on Untied::PublisherObserver
     # when ActiveRecord::Callbacks are fired.
     #
     # The following publisher watches the User after_create event:
     #
-    #   class MyPublisher
-    #     include Untied::Publisher
+    #   class MyDoorkeeper
+    #     include Untied::Doorkeeper
     #
     #     def initialize
     #       watch User, :after_create
@@ -24,8 +24,8 @@ module Untied
 
     # Watches ActiveRecord lifecycle callbacks for some Class
     #
-    #   class Pub
-    #     include Untied::Publisher
+    #   class Doorkeeper
+    #     include Untied::Doorkeeper
     #   end
     #
     #   pub.new.watch(User, :after_create)
@@ -43,15 +43,15 @@ module Untied
     # Defines the methods that are called when the registered callbacks fire.
     # For example, if the publisher is defined as follows:
     #
-    #   class Pub
-    #     include Untided::Publisher
+    #   class MyDoorkeeper
+    #     include Untided::Doorkeeper
     #
     #     def initialize
     #       watch User, :after_create
     #     end
     #   end
     #
-    # After calling Pub#define_callbacks the method
+    # After calling MyDoorkeeper#define_callbacks the method
     # _notify_untied__publisher_observer_for_after_create is created on User's
     # model. This method is called when the after_create callback is fired.
     def define_callbacks

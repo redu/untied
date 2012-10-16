@@ -31,16 +31,19 @@ Untied.configure do |config|
   config.logger = Logger.new(STDOUT)
   config.deliver_messages = true # Silent mode when falsy
   config.service_name = "social-network"
+  config.doorkeeper = "MyDoorkeeper"
 emd
 ```
 
 The ``service_name`` configuration is very important here. It must be unique across all the services and will be used to uniquely identify the models. The ``deliver_messages``option enable and disable events sending. Disabling it may be useful on test and development environment.
 
+The ``doorkeeper`` configuration let you specify which class is responsible for telling which ActiveRecord models are capable of be observed.
+
 You should also define when the ActiveRecord models will be propagated to other services. We can take advantage on the usefulness of ``ActiveRecord::Callbacks``. To keep the things DRY, this job may be done inside what we call the Watcher:
 
 ```ruby
-class Watcher
-  include Untied::Publisher
+class MyDoorkeeper
+  include Untied::Doorkeeper
 
   def initialize
     watch User, :after_create, :after_update
