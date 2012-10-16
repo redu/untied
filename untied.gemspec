@@ -27,5 +27,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "activemodel", "~> 3.0.10"
   gem.add_runtime_dependency "configurable"
   gem.add_runtime_dependency "logger"
+  gem.add_runtime_dependency "yajl-ruby"
 
 end

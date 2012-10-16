@@ -50,6 +50,10 @@ module Untied
       end
     end
 
+    def initialize
+      define_callbacks
+    end
+
     def notify(callback, klass, service, payload)
       return nil unless CALLBACKS.include? callback
       return nil unless service == observed_service
@@ -61,9 +65,26 @@ module Untied
       self.class.observed_classes
     end
 
-
     def observed_service
       self.class.observed_service
     end
+
+    def define_callbacks
+      defined_callbacks = self.methods.collect(&:to_sym) & CALLBACKS
+      observer = self
+      consumer = Untied::Consumer
+      observer_name = observer.class.to_s.underscore.gsub('/', '__')
+
+      defined_callbacks.each do |callback|
+        callback_meth = :"_notify_#{observer_name}_for_#{callback}"
+        block = Proc.new do |callback, klass, serivce, payload|
+          observer.send(:notify, callback, klass, service, payload)
+        end
+        puts "defining: #{callback_meth}"
+        consumer.send(:define_method, callback_meth, &block)
+        consumer.send(:set_callback, :process, :after, callback_meth)
+      end
+    end
+
   end
 end
