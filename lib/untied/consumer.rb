@@ -1,5 +1,3 @@
-require 'yajl/json_gem'
-
 module Untied
   class Consumer
     attr_reader :observers

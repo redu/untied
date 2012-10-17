@@ -23,10 +23,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "sqlite3"
   gem.add_development_dependency "amqp"
 
-  gem.add_runtime_dependency "activerecord", "~> 3.0.10"
-  gem.add_runtime_dependency "activemodel", "~> 3.0.10"
+  gem.add_runtime_dependency "activerecord"
   gem.add_runtime_dependency "configurable"
-  gem.add_runtime_dependency "logger"
-  gem.add_runtime_dependency "yajl-ruby"
+  gem.add_runtime_dependency "json"
 
 end
