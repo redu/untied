@@ -45,12 +45,33 @@ module Untied
       end
     end
 
-    def notify(callback, klass, service, payload)
-      return nil unless CALLBACKS.include? callback
+    # Calls the proper callback method if the current observer is configured
+    # to observe the event_name from service to the klass.
+    #
+    #   class MyObserver < Untied::Observer
+    #     observe User, :from => :core
+    #
+    #     def after_create(model); end
+    #   end
+    #
+    #   MyObserver.instance.notify(:after_create, :user, :core, { :user => { } })
+    #   # => calls after create method
+    #
+    #   MyObserver.instance.notify(:after_update, :user, :core, { :user => { } })
+    #   # => doesn't calls after create method
+    def notify(*args)
+      return nil unless args.length == 4
+
+      event_name = args.shift
+      klass = args.shift
+      service = args.shift
+      entity = args.shift
+
+      return nil unless CALLBACKS.include? event_name
       return nil unless service == observed_service
       return nil unless observed_classes.include? klass.to_s.camelize.constantize
 
-      self.send(callback, payload)
+      self.send(event_name, entity)
     end
 
     def observed_classes

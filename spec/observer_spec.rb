@@ -100,6 +100,18 @@ module Untied
         subject.should_not_receive(:after_create)
         subject.notify(:after_create, :post, :core, { :user => { :name => "há!" }})
       end
+
+      it "should not raise error when passing incorrect arguments" do
+        expect {
+          subject.notify
+        }.to_not raise_error(ArgumentError)
+      end
+
+      it "should pass through when there is incorrect arguments" do
+        subject.stub(:after_create)
+        subject.should_not_receive(:after_create)
+        subject.notify
+      end
     end
   end
 end
