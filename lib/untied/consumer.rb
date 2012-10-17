@@ -8,11 +8,12 @@ module Untied
     end
 
     def process(headers, message)
-      message = begin
-                  JSON.parse(message, :symbolize_keys => true)
-                rescue JSON::ParserError
-                  {}
-                end
+      begin
+        message = JSON.parse(message, :symbolize_names => true)
+      rescue JSON::ParserError => e
+        Untied.config.logger "Untied::Consumer: Parsing error #{e}"
+        return
+      end
 
       message = message.fetch(:event, {})
       payload = message.fetch(:payload, {})
@@ -21,7 +22,8 @@ module Untied
       klass = payload.keys.first
 
       Untied.config.logger.info \
-        "Untied::Consumer: processing message for event #{event_name}"
+        "Untied::Consumer: processing event #{event_name} from #{service} with " + \
+        "payload #{payload}"
 
       observers.each do |observer|
         observer.notify(event_name, klass, service, payload)

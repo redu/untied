@@ -12,7 +12,6 @@ module Untied
     def start
       @channel.queue(@queue_name, :exclusive => true) do |queue|
         queue.bind(@exchange, :routing_key => "untied.#").subscribe do |h,p|
-          Untied.config.logger.info "Message #{p} with headers #{h} arrived"
           @consumer.process(h,p)
         end
       end
