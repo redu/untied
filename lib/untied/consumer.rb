@@ -1,11 +1,7 @@
-require 'active_support'
 require 'yajl/json_gem'
 
 module Untied
   class Consumer
-    include ActiveSupport::Callbacks
-    # Middleware?
-    define_callbacks :process, :only => :after
     attr_reader :observers
 
     def initialize

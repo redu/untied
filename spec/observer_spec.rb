@@ -101,26 +101,5 @@ module Untied
         subject.notify(:after_create, :post, :core, { :user => { :name => "há!" }})
       end
     end
-
-    context ".define_callbacks" do
-      before do
-        class ::SuperDuperObserver < Untied::Observer
-          def after_create
-
-          end
-        end
-      end
-      after do
-        ::SuperDuperObserver.send(:remove_method, :after_create)
-      end
-      let(:subject) { ::SuperDuperObserver.instance }
-
-      it "should define callbacks on Untied::Consumer class" do
-        ::SuperDuperObserver.observe(User)
-        subject.define_callbacks
-        Consumer.new.
-          should respond_to(:_notify_super_duper_observer_for_after_create)
-      end
-    end
   end
 end
