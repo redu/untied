@@ -5,7 +5,7 @@ require 'untied/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "untied"
-  gem.version       = VERSION
+  gem.version       = Untied::VERSION
   gem.authors       = ["Guilherme Cavalcanti"]
   gem.email         = ["guiocavalcanti@gmail.com"]
   gem.description   = "Cross application ActiveRecord::Observer"
