@@ -2,7 +2,6 @@ $: << File.dirname(__FILE__)
 
 require "bundler/setup"
 require "untied"
-require "active_record"
 
 require "./observer"
 
