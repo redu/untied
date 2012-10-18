@@ -16,14 +16,13 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
-  gem.executables   << "untied_worker"
 
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "ruby-debug"
   gem.add_development_dependency "sqlite3"
-  gem.add_development_dependency "amqp"
 
   gem.add_runtime_dependency "activerecord"
+  gem.add_runtime_dependency "amqp"
   gem.add_runtime_dependency "configurable"
   gem.add_runtime_dependency "json"
 
