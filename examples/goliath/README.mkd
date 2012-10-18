@@ -62,7 +62,7 @@ goliath (master) > curl http://0.0.0.0:9000?name=guila -X POST
 
 #### Consumer
 
-The consumer listens to the events sent to the message bus and fires Untied::Observer methods defined. In this example we just defined an ``after_create`` method for the User entity (see observer.rb).
+The consumer listens to the events sent to the message bus and fires defined Untied::Observer methods. In this example we just defined an ``after_create`` method for the User entity (see observer.rb).
 
 To initialize the cosumer call the following rake task:
 
