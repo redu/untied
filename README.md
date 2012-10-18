@@ -32,7 +32,7 @@ Untied.configure do |config|
   config.deliver_messages = true # Silent mode when falsy
   config.service_name = "social-network"
   config.doorkeeper = "MyDoorkeeper"
-emd
+end
 ```
 
 The ``service_name`` configuration is very important here. It must be unique across all the services and will be used to uniquely identify the models. The ``deliver_messages``option enable and disable events sending. Disabling it may be useful on test and development environment.
