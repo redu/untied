@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'active_model'
 require 'active_record/observer'
 require 'active_record/callbacks'

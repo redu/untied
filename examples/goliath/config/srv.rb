@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'em-synchrony/activerecord'
 
 CONFIG = { Goliath.env.to_sym => { :adapter => 'sqlite3', :database => ":memory:" } }

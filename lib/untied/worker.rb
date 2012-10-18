@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Untied
   class Worker
     def initialize(opts)

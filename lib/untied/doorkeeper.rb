@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Untied
   module Doorkeeper
     # The Doorkeeper defines which ActiveRecord models will be propagated to
