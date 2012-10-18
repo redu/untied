@@ -4,7 +4,6 @@ require "bundler/setup"
 require "untied"
 require "active_record"
 
-require "models/user"
 require "./observer"
 
 # Enabling the observer defined in observer.rb

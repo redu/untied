@@ -5,5 +5,5 @@ gem "goliath"
 gem "em-synchrony"
 gem "sqlite3"
 gem "activerecord"
-gem "untied", :path  => '/Users/guiocavalcanti/workspace/work/untied-observer'
+gem "untied", :git => 'git://github.com/redu/untied.git'
 gem "rake"

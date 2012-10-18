@@ -1,5 +1,7 @@
 ## Using Untied with Goliath
 
+This example defines both the Producer and the Consumer. The producer is defined inside srv.rb, which is a goliath server. The consumer doesn't depend on the producer in any way.
+
 ### Setup
 
 ```sh
@@ -8,6 +10,8 @@ $ > cd untied/examples/goliath
 $ > bundle install
 ```
 
+The Untied gem relies on RabbitMQ, so it need to be installed in order to work properly. [Here are](http://www.rabbitmq.com/download.html) the instructions.
+
 ### Structure
 
 ```sh
@@ -15,7 +19,7 @@ $ > bundle install
 ├── Gemfile
 ├── Gemfile.lock
 ├── README.mkd
-├── Rakefile # Requires the observer.rb and models/user.rb. Listens on the message bus.
+├── Rakefile # Requires the observer.rb. Listens on the message bus.
 ├── config
 │   └── srv.rb # ActiveRecord and Untied Publisher configurations
 ├── models
@@ -66,4 +70,4 @@ Everytime an user is created on the publisher side, the consumer will process th
 #   An user was created on Goliath server, yay!
 ```
 
-
+Of course you should consume events produced by other server, say a Rails server.
