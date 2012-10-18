@@ -8,4 +8,4 @@ require "./observer"
 # Enabling the observer defined in observer.rb
 Untied::Consumer.observers = [Observer]
 
-require "tasks/untied"
+load "untied/tasks/untied.tasks"

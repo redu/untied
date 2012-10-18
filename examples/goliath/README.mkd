@@ -67,7 +67,7 @@ The consumer listens to the events sent to the message bus and fires defined Unt
 To initialize the cosumer call the following rake task:
 
 ```sh
-goliath (master) > rake untied:work
+goliath (master) > rake untied:consumer:work
 I, [2012-10-18T10:09:44.687311 #9327]  INFO -- : Worker initialized and listening
 ```
 

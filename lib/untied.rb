@@ -25,3 +25,4 @@ require 'untied/producer'
 require 'untied/publisher_observer'
 require 'untied/doorkeeper'
 require 'untied/event'
+require 'untied/railtie' if defined?(Rails)
