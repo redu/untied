@@ -4,6 +4,8 @@ Need to register an Observer which observes ActiveRecord models in different app
 
 The publisher application registers which models are able to be observed. The consumers just need to define callbacks that will be fired for certain events. The consumer part uses an API similar to the one provided by ActiveRecord::Observer.
 
+[![Build Status](https://travis-ci.org/redu/untied.png)](https://travis-ci.org/redu/untied)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -59,7 +61,7 @@ On the consumer side, you just need to define the observer as you would with Act
 
 ```ruby
 class UserObserver < Untied::Observer
-  observe "User", :from => "social-network"
+  observe :user, :from => "social-network"
 
   def after_create(user)
     puts "A the following user was created on social-network service: #{user}"

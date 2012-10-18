@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Guilherme Cavalcanti"]
   gem.email         = ["guiocavalcanti@gmail.com"]
   gem.description   = "Cross application ActiveRecord::Observer"
-  gem.summary       = "Need to register an Observer which observes ActiveRecord models in differente applications? Untied Observer for the rescue."
+  gem.summary       = "Need to register an Observer which observes ActiveRecord models in different applications? Untied Observer for the rescue."
   gem.homepage      = "http://github.com/redu/untied"
 
   gem.files         = `git ls-files`.split($/)
@@ -18,12 +18,19 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_development_dependency "rspec"
-  gem.add_development_dependency "ruby-debug"
   gem.add_development_dependency "sqlite3"
+  gem.add_development_dependency "rake"
 
   gem.add_runtime_dependency "activerecord"
   gem.add_runtime_dependency "amqp"
   gem.add_runtime_dependency "configurable"
   gem.add_runtime_dependency "json"
+
+  if RUBY_VERSION < "1.9"
+    gem.add_runtime_dependency "system_timer"
+    gem.add_development_dependency "ruby-debug"
+  else
+    gem.add_development_dependency "debugger"
+  end
 
 end
