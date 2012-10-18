@@ -24,10 +24,18 @@ The Untied gem relies on RabbitMQ, so it need to be installed in order to work p
 │   └── srv.rb # ActiveRecord and Untied Publisher configurations
 ├── models
 │   └── user.rb # ActiveRecord User model
-├── observer.rb # Untied observer
+├── observer.rb # Untied observer used by consumer
 └── srv.rb # Goliath server and Untied::Doorkeeper
 ```
 
+### More info
+
+If you don't know what sobre of the components above means, here are some references:
+
+- [Untied::Observer](https://github.com/redu/untied#consumer)
+- [Untied publisher configurations](https://github.com/redu/untied#publisher)
+- [Goliath](http://postrank-labs.github.com/goliath/)
+- [Goliath configurarions](https://github.com/postrank-labs/goliath/wiki/Configuration)
 
 ### Usage
 
