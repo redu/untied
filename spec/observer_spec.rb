@@ -36,33 +36,28 @@ module Untied
           ::UserObserver.observe(:user, :post, :from => :core)
           subject.observed_classes.should == [:user, :post]
         end
-
-        it "should accept constants" do
-          ::UserObserver.observe(User, :from => :core)
-          subject.observed_classes.should == [User]
-        end
       end
 
       context ".observed_services" do
         it "should define the observed services" do
-          ::UserObserver.observe(User, :from => :core)
+          ::UserObserver.observe(:user, :from => :core)
           subject.observed_service == :core
         end
 
         it "should define the observed services as string" do
-          ::UserObserver.observe(User, :from => "core")
+          ::UserObserver.observe(:user, :from => "core")
           subject.observed_service == :core
         end
 
         context "when omiting service name" do
           it "should default to core" do
-            ::UserObserver.observe(User)
+            ::UserObserver.observe(:user)
             subject.observed_service == :core
           end
 
           it "should define observed classes" do
-            ::UserObserver.observe(User)
-            subject.observed_classes.should == [User]
+            ::UserObserver.observe(:user)
+            subject.observed_classes.should == [:user]
           end
         end
       end

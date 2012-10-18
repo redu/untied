@@ -37,7 +37,7 @@ module Untied
           from = :core
         end
 
-        classes = args
+        classes = args.collect(&:to_sym)
 
         [from, classes]
       end
