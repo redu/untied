@@ -30,7 +30,7 @@ The Untied gem relies on RabbitMQ, so it need to be installed in order to work p
 
 ### More info
 
-If you don't know what sobre of the components above means, here are some references:
+If you don't know what some of the components above means, here are some references:
 
 - [Untied::Observer](https://github.com/redu/untied#consumer)
 - [Untied publisher configurations](https://github.com/redu/untied#publisher)
