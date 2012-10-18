@@ -29,12 +29,12 @@ module Untied
       context ".observed_classes" do
         it "should define .observed_classes" do
           ::UserObserver.observe(:user, :from => :core)
-          subject.observed_classes.should == [User]
+          subject.observed_classes.should == [:user]
         end
 
         it "should accept multiple classes" do
           ::UserObserver.observe(:user, :post, :from => :core)
-          subject.observed_classes.should == [User, Post]
+          subject.observed_classes.should == [:user, :post]
         end
 
         it "should accept constants" do
@@ -70,7 +70,7 @@ module Untied
 
     context "#notify" do
       before do
-        ::UserObserver.observe(User)
+        ::UserObserver.observe(:user)
       end
 
       it "should respont to #notify" do

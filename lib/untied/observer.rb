@@ -37,9 +37,7 @@ module Untied
           from = :core
         end
 
-        classes = args.collect do |c|
-          c.is_a?(Class) ? c : c.to_s.camelize.constantize
-        end
+        classes = args
 
         [from, classes]
       end
@@ -69,7 +67,7 @@ module Untied
 
       return nil unless CALLBACKS.include? event_name
       return nil unless service == observed_service
-      return nil unless observed_classes.include? klass.to_s.camelize.constantize
+      return nil unless observed_classes.include? klass
 
       self.send(event_name, entity)
     end

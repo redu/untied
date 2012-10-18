@@ -5,6 +5,8 @@ require 'active_record/callbacks'
 module Untied
   class PublisherObserver < ActiveRecord::Observer
     def initialize
+      Untied.config.logger.info "Untied: Initializing publisher observer"
+
       publisher.define_callbacks
       obs_classes = Proc.new do
         publisher.observed_classes
