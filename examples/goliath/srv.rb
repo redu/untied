@@ -1,25 +1,3 @@
-#!/usr/bin/env ruby
-# Installing:
-#   bundle install
-#
-# To startup the server and the Untied publisher:
-#   ruby srv.rb -sv
-#
-# To startup the consumer:
-#   rake untied:work
-#
-# Usage:
-#
-# Create an user via Goliath REST API:
-#
-#   curl -X POST http://0.0.0.0:9000?name=guila
-#   => "{\"user\":{\"created_at\":\"2012-10-18T09:26:57-03:00\",\"id\":1,\"name\":\"guila\",\"updated_at\":\"2012-10-18T09:26:57-03:00\"}}"
-#
-# The consumer should output:
-#
-#   I, [2012-10-18T09:59:14.927815 #9133]  INFO -- : Untied::Consumer: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-18T09:59:14-03:00", :id=>1, :name=>"guila", :updated_at=>"2012-10-18T09:59:14-03:00"}}
-#   An user was created on Goliath server, yay!
-
 $: << File.dirname(__FILE__)
 
 require 'bundler/setup'
