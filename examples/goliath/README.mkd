@@ -1,0 +1,69 @@
+## Using Untied with Goliath
+
+### Setup
+
+```sh
+$ > git clone git://github.com/redu/untied.git
+$ > cd untied/examples/goliath
+$ > bundle install
+```
+
+### Structure
+
+```sh
+.
+├── Gemfile
+├── Gemfile.lock
+├── README.mkd
+├── Rakefile # Requires the observer.rb and models/user.rb. Listens on the message bus.
+├── config
+│   └── srv.rb # ActiveRecord and Untied Publisher configurations
+├── models
+│   └── user.rb # ActiveRecord User model
+├── observer.rb # Untied observer
+└── srv.rb # Goliath server and Untied::Doorkeeper
+```
+
+
+### Usage
+
+#### Publisher
+
+The publisher consists of a REST API defined as a Goliath server. Every time an User is created using this API the Untied publisher will serialize it and deliver it through the message bus.
+
+All you need is to initialize goliath server
+
+```sh
+goliath (master) > ruby srv.rb -sv
+I, [2012-10-18T10:06:50.806799 #9274]  INFO -- : Untied: Initializing publisher observer
+[9274:INFO] 2012-10-18 10:06:50 :: Starting server on 0.0.0.0:9000 in development mode. Watch out for stones.
+-- create_table(:users, {:force=>true})
+   -> 0.0158s
+```
+
+And use the REST API:
+
+```sh
+goliath (master) > curl http://0.0.0.0:9000?name=guila -X POST
+"{\"user\":{\"created_at\":\"2012-10-18T09:59:14-03:00\",\"id\":1,\"name\":\"guila\",\"updated_at\":\"2012-10-18T09:59:14-03:00\"}}"
+```
+
+#### Consumer
+
+The consumer listens to the events sent to the message bus and fires Untied::Observer methods defined. In this example we just defined an ``after_create`` method for the User entity (see observer.rb).
+
+To initialize the cosumer call the following rake task:
+
+```sh
+goliath (master) > rake untied:work
+I, [2012-10-18T10:09:44.687311 #9327]  INFO -- : Worker initialized and listening
+```
+
+Everytime an user is created on the publisher side, the consumer will process the event and call the proper callback (defined in observer.rb):
+
+```
+#   I, [2012-10-18T09:59:14.927815 #9133]  INFO -- : Untied::Consumer: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-18T09:59:14-03:00", :id=>1, :name=>"guila", :updated_at=>"2012-10-18T09:59:14-03:00"}}
+#   An user was created on Goliath server, yay!
+```
+
+

@@ -1,0 +1,13 @@
+$: << File.dirname(__FILE__)
+
+require "bundler/setup"
+require "untied"
+require "active_record"
+
+require "models/user"
+require "./observer"
+
+# Enabling the observer defined in observer.rb
+Untied::Consumer.observers = [Observer]
+
+require "tasks/untied"
