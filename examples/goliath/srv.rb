@@ -10,7 +10,7 @@ require 'models/user'
 
 # Defining which ActiveRecord lifecycle events will be observed
 class Doorkeeper
-  include Untied::Doorkeeper
+  include Untied::Publisher::Doorkeeper
 
   def initialize
     # Everytime the User's after_create is fired, it will send the user
@@ -22,7 +22,7 @@ end
 Untied.config.doorkeeper = Doorkeeper
 
 # Initializing the publisher observer
-Untied::PublisherObserver.instance
+Untied::Publisher::Observer.instance
 
 class Srv < Goliath::API
   use Goliath::Rack::Params
