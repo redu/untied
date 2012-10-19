@@ -34,20 +34,13 @@ module Untied
     end
 
     def publisher
-      doorkeeper_config = Untied.config.doorkeeper
-      @doorkeeper ||= begin
-        klass = case doorkeeper_config
-          when String then doorkeeper_config.constantize;
-          when Symbol then doorkeeper_config.to_s.camelize.constantize;
-          else
-            doorkeeper_config
-          end
+      return @publisher if defined?(@publisher)
 
-          klass.new
-        rescue NameError => e
-          raise NameError.new "You should define a class which includes " + \
-            "Untied::Doorkeeper and set it name to Untied.config.doorkeeper."
-        end
+      unless Untied.config.doorkeeper
+        raise NameError.new "You should define a class which includes " + \
+          "Untied::Doorkeeper and set it name to Untied.config.doorkeeper."
+      end
+      @publisher = Untied.config.doorkeeper.new
     end
   end
 end

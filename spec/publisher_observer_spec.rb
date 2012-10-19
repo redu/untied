@@ -17,7 +17,7 @@ module Untied
 
     context ".instance" do
       it "should raise a friendly error when no doorkeeper is defined" do
-        Untied.config.doorkeeper = "SomeClass"
+        Untied.config.doorkeeper = nil
         klass = Class.new(PublisherObserver)
         expect {
           klass.instance

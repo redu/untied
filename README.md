@@ -33,7 +33,7 @@ Untied.configure do |config|
   config.logger = Logger.new(STDOUT)
   config.deliver_messages = true # Silent mode when falsy
   config.service_name = "social-network"
-  config.doorkeeper = "MyDoorkeeper"
+  config.doorkeeper = MyDoorkeeper
 end
 ```
 

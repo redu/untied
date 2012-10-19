@@ -13,7 +13,6 @@ require 'support/setup_ar_and_schema'
 Untied.configure do |config|
   config.service_name = "core"
   config.deliver_messages = false
-  config.doorkeeper = "::Doorkeeper"
 end
 
 RSpec.configure do |config|
