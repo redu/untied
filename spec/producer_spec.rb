@@ -33,7 +33,7 @@ module Untied
       context "#publish" do
         it "should call Channel#publish" do
           mock_reactor_and_amqp do |channel|
-            e = Event.new(:name => "create", :payload => { :foo => 'bar' })
+            e = Event.new(:name => "create", :payload => { :foo => 'bar' }, :origin => :core)
             channel.topic.should_receive(:publish)
             producer = Producer.new(:channel => channel, :deliver_messages => true)
             producer.publish(e)

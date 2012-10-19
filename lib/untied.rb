@@ -19,7 +19,6 @@ module Untied
   end
 end
 
-require 'untied/config'
 require 'untied/event'
 require 'untied/consumer/consumer'
 require 'untied/publisher/publisher'

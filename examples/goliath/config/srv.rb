@@ -13,7 +13,7 @@ ActiveRecord::Schema.define do
   end
 end
 
-Untied.configure do |config|
+Untied::Publisher.configure do |config|
   config.logger = Logger.new(STDOUT)
   config.deliver_messages = true
   config.service_name = "goliath"

@@ -8,7 +8,7 @@ module Untied
         @consumer = opts[:consumer] || Processor.new
         @exchange = opts[:exchange]
 
-        Untied.config.logger.info "Worker initialized and listening"
+        Consumer.config.logger.info "Worker initialized and listening"
       end
 
       def start

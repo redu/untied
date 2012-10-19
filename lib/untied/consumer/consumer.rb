@@ -5,6 +5,7 @@ module Untied
 end
 
 require 'untied/event'
+require 'untied/consumer/config'
 require 'untied/consumer/processor'
 require 'untied/consumer/observer'
 require 'untied/consumer/railtie' if defined?(Rails)

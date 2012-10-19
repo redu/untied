@@ -6,6 +6,8 @@ require "untied"
 require "./observer"
 
 # Enabling the observer defined in observer.rb
-Untied::Consumer::Processor.observers = [Observer]
+Untied::Consumer.config do |c|
+  c.observers = [Observer]
+end
 
 load "untied/consumer/tasks/untied.tasks"

@@ -29,7 +29,7 @@ The untied Gem relies on RabbitMQ, so it need to be installed in order to work p
 You need to do some configurations on the publisher side:
 
 ```ruby
-Untied.configure do |config|
+Untied::Publisher.configure do |config|
   config.logger = Logger.new(STDOUT)
   config.deliver_messages = true # Silent mode when falsy
   config.service_name = "social-network"
@@ -75,6 +75,13 @@ end
 
 One important step is identify which service models the observer is listening to. That's why we user the ``:from`` option on the ``observe`` method.
 
+Activating observers:
+
+```ruby
+Untied::Consumer.configure do |config|
+  config.observers = [UserObserver]
+end
+```
 
 ## Internals
 

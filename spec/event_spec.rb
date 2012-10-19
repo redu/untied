@@ -21,12 +21,13 @@ module Untied
 
     context ".new" do
       it "should accept an event name and a payload" do
-        Event.new(:name => :after_create, :payload => double('User')).
+        Event.
+          new(:name => :after_create, :payload => double('User'), :origin => "core").
           should be_a Event
       end
 
       it "should include the origin service name" do
-        Event.new(:name => :after_create, :payload => person).
+        Event.new(:name => :after_create, :payload => person, :origin => "core").
           origin.should == "core"
       end
     end
@@ -40,8 +41,8 @@ module Untied
             :origin => :core
           }
         }
-        Event.new(:name => :after_create, :payload => person).to_json == \
-          event.to_json
+        Event.new(:name => :after_create, :payload => person, :origin => :core).
+          to_json == event.to_json
       end
 
     end

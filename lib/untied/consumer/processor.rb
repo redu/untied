@@ -13,7 +13,7 @@ module Untied
         begin
           message = JSON.parse(message, :symbolize_names => true)
         rescue JSON::ParserError => e
-          Untied.config.logger "Untied::Processor: Parsing error #{e}"
+          Consumer.config.logger "Untied::Processor: Parsing error #{e}"
           return
         end
 
@@ -23,7 +23,7 @@ module Untied
         event_name = message[:name].try(:to_sym)
         klass = payload.keys.first
 
-        Untied.config.logger.info \
+        Consumer.config.logger.info \
           "Untied::Processor: processing event #{event_name} from #{service} with " + \
           "payload #{payload}"
 

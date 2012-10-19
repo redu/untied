@@ -10,8 +10,10 @@ module Untied
       @config = {
         :name => "after_create",
         :payload => nil,
-        :origin => Untied.config.service_name
+        :origin => nil
       }.merge(attrs)
+
+      raise "You should inform the origin service" unless @config[:origin]
 
       @name = @config.delete(:name)
       @payload = @config.delete(:payload)

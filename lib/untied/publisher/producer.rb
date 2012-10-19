@@ -6,15 +6,15 @@ module Untied
     class Producer
       def initialize(opts={})
         @opts = {
-          :service_name => Untied.config.service_name,
-          :deliver_messages => Untied.config.deliver_messages,
+          :service_name => Publisher.config.service_name,
+          :deliver_messages => Publisher.config.deliver_messages,
           :channel => nil,
         }.merge(opts)
 
         @routing_key = "untied.#{@opts[:service_name]}"
 
         if !@opts[:deliver_messages]
-          Untied.config.logger.info \
+          Publisher.config.logger.info \
             "AMQP.channel was not setted up because message delivering is disabled."
           return
         end
@@ -22,7 +22,7 @@ module Untied
         check_em_reactor
 
         if AMQP.channel || @opts[:channel]
-          Untied.config.logger.info "Using defined AMQP.channel"
+          Publisher.config.logger.info "Using defined AMQP.channel"
           @channel = AMQP.channel || @opts[:channel]
           @exchange = @channel.topic("untied", :auto_delete => true)
         end
@@ -37,13 +37,13 @@ module Untied
       def safe_publish(e)
         if @opts[:deliver_messages]
           @exchange.publish(e.to_json, :routing_key => @routing_key) do
-            Untied.config.logger.info \
+            Publisher.config.logger.info \
               "Publishing event #{e.inspect} with routing key #{@routing_key}"
           end
         else
-          Untied.config.logger.info \
+          Publisher.config.logger.info \
             "The event #{ e.inspect} was not delivered. Try to set " + \
-            "Untied.config.deliver_messages to true"
+            "Untied::Publisher.config.deliver_messages to true"
         end
       end
 

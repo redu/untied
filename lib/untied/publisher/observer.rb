@@ -7,7 +7,7 @@ module Untied
   module Publisher
     class Observer < ActiveRecord::Observer
       def initialize
-        Untied.config.logger.info "Untied: Initializing publisher observer"
+        Publisher.config.logger.info "Untied: Initializing publisher observer"
 
         publisher.define_callbacks
         observed = publisher.observed_classes
@@ -27,7 +27,9 @@ module Untied
       protected
 
       def produce_event(callback, model)
-        producer.publish Event.new(:name => callback, :payload => model)
+        e = Event.new(:name => callback, :payload => model,
+                      :origin => Publisher.config.service_name)
+        producer.publish(e)
       end
 
       def producer
@@ -37,11 +39,11 @@ module Untied
       def publisher
         return @publisher if defined?(@publisher)
 
-        unless Untied.config.doorkeeper
+        unless Publisher.config.doorkeeper
           raise NameError.new "You should define a class which includes " + \
-            "Untied::Doorkeeper and set it name to Untied.config.doorkeeper."
+            "Untied::Publisher::Doorkeeper and set it name to Untied::Publisher.config.doorkeeper."
         end
-        @publisher = Untied.config.doorkeeper.new
+        @publisher = Publisher.config.doorkeeper.new
       end
     end
   end

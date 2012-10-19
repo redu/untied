@@ -3,6 +3,7 @@ module Untied
   end
 end
 
+require 'untied/publisher/config'
 require 'untied/publisher/doorkeeper'
 require 'untied/publisher/observer'
 require 'untied/publisher/producer'

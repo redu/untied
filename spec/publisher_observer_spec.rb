@@ -12,13 +12,13 @@ module Untied
             watch(User, :after_update)
           end
         end
-        Untied.config.doorkeeper = MyDoorkeeper
+        Untied::Publisher.config.doorkeeper = MyDoorkeeper
       end
-      after { Untied.config.doorkeeper = MyDoorkeeper }
+      after { Untied::Publisher.config.doorkeeper = MyDoorkeeper }
 
       context ".instance" do
         it "should raise a friendly error when no doorkeeper is defined" do
-          Untied.config.doorkeeper = nil
+          Untied::Publisher.config.doorkeeper = nil
           klass = Class.new(Observer)
           expect {
             klass.instance
