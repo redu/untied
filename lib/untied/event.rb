@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'active_model'
+
 module Untied
   class Event
     include ActiveModel::Serializers::JSON

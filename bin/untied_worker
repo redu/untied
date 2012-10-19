@@ -10,7 +10,7 @@ module Untied
     channel  = AMQP::Channel.new(connection)
     exchange = channel.topic("untied", :auto_delete => true)
     # consumer = Consumer.new
-    worker = Worker.new(:channel => channel, :exchange => exchange)
+    worker = Consumer::Worker.new(:channel => channel, :exchange => exchange)
     worker.start
   end
 end

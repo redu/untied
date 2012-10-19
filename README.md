@@ -60,7 +60,7 @@ The watcher defined above will propagate Users instances when they are created o
 On the consumer side, you just need to define the observer as you would with ActiveRecord::Observer. Remember to subclass Untied::Observer instead.
 
 ```ruby
-class UserObserver < Untied::Observer
+class UserObserver < Untied::Consumer::Observer
   observe :user, :from => "social-network"
 
   def after_create(user)

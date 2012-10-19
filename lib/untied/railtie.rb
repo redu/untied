@@ -11,7 +11,7 @@ module Untied
     end
 
     rake_tasks do
-      load "untied/tasks/untied.tasks"
+      load "untied/consumer/tasks/untied.tasks"
     end
   end
 end

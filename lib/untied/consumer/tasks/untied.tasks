@@ -1,4 +1,4 @@
-require 'untied/worker'
+require 'untied/consumer/worker'
 
 namespace :untied do
   namespace :consumer do
@@ -7,7 +7,7 @@ namespace :untied do
       AMQP.start do |connection|
         channel  = AMQP::Channel.new(connection)
         exchange = channel.topic("untied", :auto_delete => true)
-        worker = Untied::Worker.new(:channel => channel, :exchange => exchange)
+        worker = Untied::Consumer::Worker.new(:channel => channel, :exchange => exchange)
         worker.start
       end
     end

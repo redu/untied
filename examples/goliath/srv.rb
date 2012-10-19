@@ -19,6 +19,8 @@ class Doorkeeper
   end
 end
 
+Untied.config.doorkeeper = Doorkeeper
+
 # Initializing the publisher observer
 Untied::PublisherObserver.instance
 
