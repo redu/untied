@@ -20,5 +20,4 @@ module Untied
 end
 
 require 'untied/event'
-require 'untied/consumer/consumer'
 require 'untied/publisher/publisher'
