@@ -9,11 +9,9 @@ module Untied
       Untied.config.logger.info "Untied: Initializing publisher observer"
 
       publisher.define_callbacks
-      obs_classes = Proc.new do
-        publisher.observed_classes
-      end
+      observed = publisher.observed_classes
 
-      self.class.send(:define_method, :observed_classes, obs_classes)
+      self.class.send(:define_method, :observed_classes, Proc.new { observed })
       super
     end
 
@@ -36,13 +34,20 @@ module Untied
     end
 
     def publisher
-      doorkeeper = Untied.config.doorkeeper
-      klass = case doorkeeper
-      when String then doorkeeper.constantize;
-      when Symbol then doorkeeper.to_s.camelize.constantize;
-      end
+      doorkeeper_config = Untied.config.doorkeeper
+      @doorkeeper ||= begin
+        klass = case doorkeeper_config
+          when String then doorkeeper_config.constantize;
+          when Symbol then doorkeeper_config.to_s.camelize.constantize;
+          else
+            doorkeeper_config
+          end
 
-      klass.new
+          klass.new
+        rescue NameError => e
+          raise NameError.new "You should define a class which includes " + \
+            "Untied::Doorkeeper and set it name to Untied.config.doorkeeper."
+        end
     end
   end
 end

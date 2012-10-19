@@ -4,14 +4,24 @@ require 'spec_helper'
 module Untied
   describe PublisherObserver do
     before do
-      class ::Doorkeeper
+      class MyDoorkeeper
         include Untied::Doorkeeper
+        def initialize
+          watch(User, :after_create)
+          watch(User, :after_update)
+        end
       end
-      PublisherObserver.any_instance.stub(:publisher) do
-        publisher = ::Doorkeeper.new
-        publisher.watch(User, :after_create)
-        publisher.watch(User, :after_update)
-        publisher
+      Untied.config.doorkeeper = MyDoorkeeper
+    end
+    after { Untied.config.doorkeeper = MyDoorkeeper }
+
+    context ".instance" do
+      it "should raise a friendly error when no doorkeeper is defined" do
+        Untied.config.doorkeeper = "SomeClass"
+        klass = Class.new(PublisherObserver)
+        expect {
+          klass.instance
+        }.to raise_error(/should define a class which includes/)
       end
     end
 
