@@ -4,7 +4,12 @@ Need to register an Observer which observes ActiveRecord models in different app
 
 The publisher application registers which models are able to be observed. The consumers just need to define callbacks that will be fired for certain events. The consumer part uses an API similar to the one provided by ActiveRecord::Observer.
 
-[![Build Status](https://travis-ci.org/redu/untied.png)](https://travis-ci.org/redu/untied)
+**Build status**
+
+- Untied::Consumer [![Build Status](https://travis-ci.org/redu/untied-consumer.png)](https://travis-ci.org/redu/untied-consumer)
+- Untied::Publisher [![Build Status](https://travis-ci.org/redu/untied-publisher.png)](https://travis-ci.org/redu/untied-publisher)
+
+### Publisher
 
 ## Installation
 
