@@ -18,6 +18,3 @@ module Untied
     end
   end
 end
-
-require 'untied/event'
-require 'untied/publisher/publisher'

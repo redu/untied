@@ -5,6 +5,7 @@ require 'bundler/setup'
 require 'goliath'
 require 'em-synchrony/activerecord'
 require 'untied'
+require 'untied-publisher'
 
 require 'models/user'
 
