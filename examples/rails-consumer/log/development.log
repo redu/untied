@@ -1,0 +1,135 @@
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.5ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20121019152451)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "login" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20121019152451')
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateUsers (20121019152451)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (25.0ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20121019152451'
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20121019155057)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20121019155057')[0m
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36m (0.4ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Worker initialized and listening
+Untied::Processor: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-20T14:34:09-03:00", :id=>2, :name=>"guila", :updated_at=>"2012-10-20T14:34:09-03:00"}}
+Worker initialized and listening
+Untied::Processor: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-20T14:34:50-03:00", :id=>3, :name=>"guila", :updated_at=>"2012-10-20T14:34:50-03:00"}}
+Worker initialized and listening
+Worker initialized and listening
+Untied::Processor: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-20T15:02:53-03:00", :id=>1, :name=>"guila", :updated_at=>"2012-10-20T15:02:53-03:00"}}
+Connecting to database specified by database.yml
+Worker initialized and listening
+Untied::Processor: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-20T15:08:24-03:00", :id=>2, :name=>"guila", :updated_at=>"2012-10-20T15:08:24-03:00"}}
+Worker initialized and listening
+Untied::Processor: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-20T15:08:51-03:00", :id=>3, :name=>"guila", :updated_at=>"2012-10-20T15:08:51-03:00"}}
+Creating user
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (110.8ms)[0m  INSERT INTO "users" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", Sat, 20 Oct 2012 18:08:52 UTC +00:00], ["name", "guila"], ["updated_at", Sat, 20 Oct 2012 18:08:52 UTC +00:00]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2012-10-20 15:09:35 -0300
+Connecting to database specified by database.yml
+Served asset /rails.png - 200 OK (29ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2012-10-20 15:09:38 -0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (8.1ms)
+Compiled scaffolds.css  (66ms)  (pid 66598)
+Compiled users.css  (1ms)  (pid 66598)
+Compiled application.css  (134ms)  (pid 66598)
+Compiled jquery.js  (6ms)  (pid 66598)
+Compiled jquery_ujs.js  (0ms)  (pid 66598)
+Compiled users.js  (229ms)  (pid 66598)
+Compiled application.js  (350ms)  (pid 66598)
+Completed 200 OK in 744ms (Views: 675.1ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-10-20 15:09:38 -0300
+Served asset /application.css - 200 OK (6ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2012-10-20 15:09:39 -0300
+Served asset /scaffolds.css - 200 OK (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-10-20 15:09:39 -0300
+Served asset /application.js - 200 OK (6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-10-20 15:09:39 -0300
+Served asset /jquery_ujs.js - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-10-20 15:09:39 -0300
+Served asset /jquery.js - 200 OK (2ms)
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2012-10-20 15:09:39 -0300
+Served asset /users.js - 200 OK (2ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2012-10-20 15:09:39 -0300
+Served asset /users.css - 200 OK (1ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2012-10-20 15:09:41 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  Rendered users/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 11ms (Views: 7.7ms | ActiveRecord: 0.4ms)
+Untied::Processor: processing event after_create from goliath with payload {:user=>{:created_at=>"2012-10-20T15:14:03-03:00", :id=>4, :name=>"guila", :updated_at=>"2012-10-20T15:14:03-03:00"}}
+Creating user
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (247.6ms)[0m  [1mINSERT INTO "users" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", Sat, 20 Oct 2012 18:14:03 UTC +00:00], ["name", "guila"], ["updated_at", Sat, 20 Oct 2012 18:14:03 UTC +00:00]]
+  [1m[35m (197.1ms)[0m  commit transaction

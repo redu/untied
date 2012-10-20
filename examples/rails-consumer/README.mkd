@@ -1,0 +1,37 @@
+# Untied::Consumer Rails example
+
+This project shows how to use the [Untied](http://github.com/redu/untied) gem in a Rails project.
+
+The untied Gem relies on RabbitMQ, so it need to be installed in order to work properly. [Here are](http://www.rabbitmq.com/download.html) the instructions.
+
+## Structure
+
+The relevant files are:
+
+```
+Gemfile
+app/models/
+├── untied_user_observer.rb
+└── user.rb
+config/initializers/
+└── untied.rb
+```
+
+- The Gemfile adds untied-consumer as a dependency;
+- The ``app/models/untied_user_observer.rb`` listens the Message Bus for User creation events. It inherits from Untied::Consumer::Observer and works in a similar way as the well known ActiveRecord::Observer;
+- The ``config/initializes/untied.rb`` registers UntiedUserObserver;
+
+
+## Running the server
+
+```sh
+$> bundle install
+$> bundle exec rails s
+```
+
+## Starting the worker
+
+```sh
+$> rabbitmq-server
+$> rake untied:consumer:work
+```
