@@ -85,8 +85,11 @@ Activating observers:
 ```ruby
 Untied::Consumer.configure do |config|
   config.observers = [UserObserver]
+  config.abort_on_exception = false # default: false
 end
 ```
+
+The ``abort_on_exception`` configuration tells if the worker should ignore Exception thrown. If set to true the exception and the stacktrace will be logged but the worker will not stop. This is recomended for production environments.
 
 ## Internals
 
