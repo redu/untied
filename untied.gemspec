@@ -18,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_development_dependency "rake"
-  gem.add_runtime_dependency "amqp"
 
   gem.add_runtime_dependency "untied-consumer"
   gem.add_runtime_dependency "untied-publisher"
