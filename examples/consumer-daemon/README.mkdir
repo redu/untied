@@ -1,0 +1,31 @@
+# Untied consumer as a deamon proccess
+
+Here is an example of how to run untied consumer in background. This is useful for deployment automation. We also keep the process ID on a file so you can monitor the process using Monit or God.
+
+## How to
+
+Add the following line to your Gemfile:
+
+```
+gem 'daemons'
+```
+
+Or simple install the [daemons](http://daemons.rubyforge.org/) gem using ``gem install daemons``.
+
+That is it, you should call the method ``daemonize`` from the worker class and provide the log and pid directories absolute paths.
+
+```ruby
+worker = Untied::Consumer::Worker.new
+worker.daemonize(:pids_dir => pids_dir, :log_dir => log_dir)
+```
+
+Now you have access to the following commands:
+
+```sh
+$ ruby consumerd.rb start
+$ ruby consumerd.rb status
+untiedc: running [pid 52324]
+$ ruby consumerd.rb stop
+untiedc: trying to stop process with pid 52324...
+untiedc: process with pid 52324 successfully stopped.
+```

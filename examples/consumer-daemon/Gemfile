@@ -1,0 +1,6 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+gem 'rake'
+gem 'untied-consumer', :git => 'git://github.com/redu/untied-consumer.git'
+gem 'daemons'
