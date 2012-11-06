@@ -58,7 +58,35 @@ class MyDoorkeeper
 end
 ```
 
-The watcher defined above will propagate Users instances when they are created or updated.
+The watcher defined above will propagate Users instances when they are created or updated. The ``to_json`` will be called whenever the model is propagated.
+
+#### Models representers
+
+You can use gems such as [ROAR](https://github.com/apotonick/roar) or [representable](https://github.com/apotonick/representable) to define how your models will be mapped into JSONs:
+
+```ruby
+require 'roar/representer/json'
+
+module UserRepresenter
+  include Roar::Representer::JSON
+
+  property :complete_name
+
+  def complete_name
+    "#{self.frist_name} #{self.last_name}"
+  end
+end
+
+class DoorkeeperWithRepresenter
+  include Untied::Doorkeeper
+
+  def initialize
+    watch User, :after_create, :represent_with => UserRepresenter
+  end
+end
+```
+
+Untied will extend the user instance with ``UserRepresenter`` just before sending it into the wire.
 
 ### Consumer
 
