@@ -117,6 +117,8 @@ Untied::Consumer.configure do |config|
 end
 ```
 
+You should start the consumer running the ``untied:consumer:worker`` Raketask.
+
 The ``abort_on_exception`` configuration tells if the worker should ignore Exception thrown. If set to true the exception and the stacktrace will be logged but the worker will not stop. This is recomended for production environments.
 
 ## Internals
@@ -126,10 +128,7 @@ TODO
 ## What need to be done?
 
 - Make it ActiveRecord independent.
-- Add instructions about how to initialize the worker.
 - Failsafeness
-- Do not rely on Pub class name
-
 
 ## Contributing
 
