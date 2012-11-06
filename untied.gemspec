@@ -19,6 +19,6 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake"
 
-  gem.add_runtime_dependency "untied-consumer"
-  gem.add_runtime_dependency "untied-publisher"
+  gem.add_runtime_dependency "untied-consumer", "~> 0.0.4"
+  gem.add_runtime_dependency "untied-publisher", "~> 0.0.4"
 end
