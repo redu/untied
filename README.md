@@ -88,6 +88,23 @@ end
 
 Untied will extend the user instance with ``UserRepresenter`` just before sending it into the wire.
 
+#### DelayedJob
+
+If you want to publish messages from [DelayedJob](https://github.com/collectiveidea/delayed_job) you should be aware that is necessary to initialize AMQP and Eventmachine again after forking. It's a known issue that Eventmachine's reactor doesn't survives process forking, so we need to setup again:
+
+```ruby
+Delayed::Worker.lifecycle.before(:invoke_job) do
+  if !defined?(@@em_thread) && Delayed::Worker.delay_jobs
+    Delayed::Worker.logger.info "Initializing EM and AMQP"
+    EM.stop if EM.reactor_running?
+    @@em_thread = Thread.new do
+      EventMachine.run { AMQP.start }
+    end
+    sleep(0.25)
+  end
+end
+```
+
 ### Consumer
 
 On the consumer side, you just need to define the observer as you would with ActiveRecord::Observer. Remember to subclass Untied::Observer instead.
