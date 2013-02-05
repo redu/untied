@@ -90,7 +90,7 @@ Untied will extend the user instance with ``UserRepresenter`` just before sendin
 
 #### DelayedJob
 
-If you want to publish messages from [DelayedJob](https://github.com/collectiveidea/delayed_job) you should be aware that is necessary to initialize AMQP and Eventmachine again after forking. It's a known issue that Eventmachine's reactor doesn't survives process forking, so we need to setup again:
+If you want to publish messages from [DelayedJob](https://github.com/collectiveidea/delayed_job) you should be aware that is necessary to initialize AMQP and Eventmachine again after forking. It's a [known issue](https://github.com/eventmachine/eventmachine/issues/213) that Eventmachine's reactor doesn't survives process forking, so we need to setup again:
 
 ```ruby
 Delayed::Worker.lifecycle.before(:invoke_job) do
