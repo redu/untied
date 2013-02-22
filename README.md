@@ -105,6 +105,18 @@ Delayed::Worker.lifecycle.before(:invoke_job) do
 end
 ```
 
+#### Adapters
+
+Untied::Publisher has native support to two adapters: [AMQP](https://github.com/ruby-amqp/amqp) and [Bunny](https://github.com/ruby-amqp/bunny) (default). In order to change them use the ``adapter`` configuration:
+
+```ruby
+Untied::Publisher.configure do |config|
+  config.adapter = :AMQP # the default is :Bunny
+end
+```
+
+Remember that, due to the async nature of AMQP, the ``:AMQP`` adapter assumes that you are inside a [EventMachine](https://github.com/eventmachine/eventmachine) loop.
+
 ### Consumer
 
 On the consumer side, you just need to define the observer as you would with ActiveRecord::Observer. Remember to subclass Untied::Observer instead.
