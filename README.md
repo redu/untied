@@ -157,7 +157,7 @@ TODO
 ## What need to be done?
 
 - Make it ActiveRecord independent.
-- Failsafeness
+- Use something like [serverengine](https://github.com/frsyuki/serverengine) instead of the old [deamons](http://daemons.rubyforge.org/) gem
 
 ## Contributing
 
